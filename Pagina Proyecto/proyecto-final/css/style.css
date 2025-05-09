@@ -1,0 +1,500 @@
+/* proyecto-final/css/style.css */
+
+/* 1. Importación de Fuentes (Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap');
+
+/* 2. Variables CSS Globales (Paleta de Colores y Fuentes) */
+:root {
+    /* Paleta de Colores Principal (Marrones, Cremas, Acentos) */
+    --color-primary: #998c87; /* Marrón medio principal (Ej: Material Brown 400) */
+    --color-primary-light: #A1887F; /* Marrón claro (Ej: Material Brown 300) */
+    --color-primary-dark: #474240;  /* Marrón oscuro (Ej: Material Brown 700) */
+
+    --color-secondary: #BCAAA4; /* Un marrón grisáceo claro o beige (Ej: Material Brown 200) */
+    --color-secondary-light: #dddcdc;/* Beige más claro (Ej: Material Brown 100) */
+    --color-secondary-dark: #795548; /* Marrón más intenso como secundario oscuro (Ej: Material Brown 500) */
+
+    --color-accent: #A1887F;    /* Un melocotón o coral suave como acento (Ej: Material Deep Orange 200) */
+    --color-accent-dark: #816860; /* Acento más oscuro/vibrante (Ej: Material Deep Orange 400) */
+
+    --color-background: #F5F5F5;       /* Blanco hueso o gris muy claro para el fondo general (Material Grey 100) */
+    --color-background-alt: #EFEBE9;   /* Un fondo alternativo ligeramente más cálido (Material Brown 50) */
+    --color-surface: #FFFFFF;          /* Blanco puro para superficies como tarjetas, modales */
+
+    --color-text-main: #242323;        /* Marrón oscuro para texto principal (Ej: Material Brown 800) */
+    --color-text-muted: #141414;       /* Gris medio para texto secundario o silenciado (Material Grey 600) */
+    --color-text-on-primary: #fcf7f7;  /* Texto blanco sobre fondos primarios oscuros */
+    --color-text-on-secondary: #302927;/* Texto marrón muy oscuro sobre fondos secundarios claros */
+    --color-text-link: var(--color-primary-dark);
+    --color-text-link-hover: var(--color-accent-dark);
+
+    --color-border: #D7CCC8;           /* Borde sutil (Ej: Material Brown 100) */
+    --color-border-light: #E0E0E0;     /* Borde aún más claro */
+    --color-border-ultralight: #f1f1f1; /* Borde casi invisible */
+
+    /* Fuentes */
+    --font-primary: 'Montserrat', sans-serif; /* Fuente sans-serif moderna y legible */
+    --font-secondary: 'Lora', serif;      /* Fuente serif elegante para títulos o énfasis */
+
+    /* Bordes y Sombras */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
+    --border-radius-pill: 50px;
+
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.07);
+    --shadow-lg: 0 10px 20px rgba(0,0,0,0.09);
+
+    /* Transiciones */
+    --transition-fast: 0.2s ease-in-out;
+    --transition-smooth: 0.3s ease-in-out;
+
+    /* Header Height (para padding-top del body) */
+    --header-height: 70px;
+}
+
+/* 3. Reset y Normalización Básica */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base para REMs */
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--color-text-main);
+    background-color: var(--color-background);
+    line-height: 1.65;
+    padding-top: var(--header-height); /* Espacio para el header fijo */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 4. Estilos de Tipografía Global */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    line-height: 1.3;
+    margin-bottom: 0.75em; /* Ajustado */
+}
+
+h1 { font-size: 2.8rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.8rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+
+p {
+    margin-bottom: 1.25em;
+}
+
+a {
+    color: var(--color-text-link);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+a:hover {
+    color: var(--color-text-link-hover);
+    text-decoration: underline;
+}
+
+img, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul, ol {
+    margin-bottom: 1.25em;
+    padding-left: 20px; /* Indentación estándar para listas */
+}
+li {
+    margin-bottom: 0.5em;
+}
+
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--color-border);
+    margin: 2em 0;
+}
+
+/* 5. Layout y Contenedor Principal */
+.container {
+    width: 90%;
+    max-width: 1140px; /* Contenedor estándar tipo Bootstrap */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px; /* Gutters */
+    padding-right: 15px; /* Gutters */
+}
+
+/* Para contenedores más anchos si es necesario */
+.container-fluid {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+/* 6. Estilos del Header del Sitio (.site-header) */
+.site-header {
+    background-color: var(--color-surface);
+    height: var(--header-height);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    padding: 0; /* El padding lo manejará el .container interno */
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.site-logo a {
+    font-family: var(--font-secondary);
+    font-size: 1.5rem; /* Tamaño del logo */
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+.site-logo img {
+    height: 35px; /* Ajusta si usas una imagen de logo */
+    margin-right: 10px;
+}
+
+.main-navigation ul {
+    list-style: none;
+    display: flex;
+    margin: 0; padding: 0; /* Reset específico para la lista de nav */
+}
+.main-navigation li {
+    margin: 0; /* Reset específico para los items de nav */
+    margin-left: 25px; /* Espacio entre elementos de navegación */
+}
+.main-navigation a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--color-text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 0; /* Para mejor área de click y borde inferior animado */
+    position: relative;
+    text-decoration: none; /* Asegurar que no haya subrayado por defecto */
+}
+.main-navigation a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 4px; /* Espacio entre texto y línea */
+    right: 0;
+    background: var(--color-accent);
+    transition: width var(--transition-smooth);
+}
+.main-navigation a:hover::after,
+.main-navigation a.active::after {
+    width: 100%;
+    left: 0;
+}
+.main-navigation a:hover,
+.main-navigation a.active {
+    color: var(--color-primary-dark); /* Color del texto al hacer hover o activo */
+    text-decoration: none; /* Quitar subrayado del hover de 'a' general */
+}
+.main-navigation ul {
+    list-style: none;
+    display: flex; /* Esto probablemente cambiará en móvil */
+    margin: 0; padding: 0;
+}
+.main-navigation li {
+    margin: 0;
+    margin-left: 25px;
+}
+/* 7. Estilos del Footer del Sitio (.site-footer) */
+.site-footer {
+    background-color: var(--color-background-alt);
+    color: var(--color-text-muted);
+    padding: 40px 0; /* Aumentado padding vertical */
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+    margin-top: 50px; /* Espacio sobre el footer */
+    font-size: 0.9rem;
+}
+.site-footer p {
+    margin-bottom: 0.5em;
+}
+.site-footer a {
+    color: var(--color-text-main);
+    font-weight: 500;
+}
+.site-footer a:hover {
+    color: var(--color-accent-dark);
+}
+
+
+/* 8. Clases de Utilidad General */
+.text-center { text-align: center !important; }
+.text-left   { text-align: left !important; }
+.text-right  { text-align: right !important; }
+
+.d-block { display: block !important; }
+.d-flex  { display: flex !important; }
+.d-none  { display: none !important; }
+
+/* Margins & Paddings (ejemplos, puedes expandir esto con .m-*, .p-*, .mt-*, etc.) */
+.mt-1 { margin-top: 1rem !important; }
+.mt-2 { margin-top: 2rem !important; }
+.mb-1 { margin-bottom: 1rem !important; }
+.mb-2 { margin-bottom: 2rem !important; }
+/* etc. */
+
+/* Botones */
+.btn {
+    display: inline-block;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    padding: 0.75rem 1.5rem; /* Padding generoso */
+    border-radius: var(--border-radius-pill); /* Botones tipo píldora por defecto */
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    line-height: 1.5; /* Para consistencia vertical */
+    user-select: none; /* Evitar selección de texto en botones */
+}
+.btn:hover {
+    text-decoration: none; /* Quitar subrayado al pasar el ratón */
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+.btn:active {
+    transform: translateY(0px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Estilos de botones principales */
+.btn-primary {
+    color: var(--color-text-on-primary);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    color: var(--color-text-on-primary);
+}
+
+.btn-secondary {
+    color: var(--color-text-on-secondary);
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
+.btn-secondary:hover {
+    background-color: var(--color-secondary-dark);
+    border-color: var(--color-secondary-dark);
+    color: var(--color-text-on-primary); /* Puede necesitar ajuste si el secundario oscuro es claro */
+}
+
+.btn-accent {
+    color: var(--color-surface); /* Texto blanco para el acento */
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+.btn-accent:hover {
+    background-color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+    color: var(--color-surface);
+}
+
+
+.btn-danger { /* Para acciones destructivas como "Borrar Puntuaciones" */
+    color: #fff;
+    background-color: #dc3545; /* Rojo estándar de peligro */
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: #fff;
+}
+
+.btn-light {
+    color: var(--color-text-main);
+    background-color: var(--color-surface);
+    border-color: var(--color-border);
+}
+.btn-light:hover {
+    background-color: var(--color-background-alt); /* Ligeramente más oscuro */
+    border-color: var(--color-border);
+    color: var(--color-text-main);
+}
+
+
+.btn-outline-primary {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background-color: transparent;
+}
+.btn-outline-primary:hover {
+    color: var(--color-text-on-primary);
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+/* Puedes añadir .btn-outline-secondary, .btn-outline-accent si los necesitas */
+
+
+.btn-lg {
+    padding: 0.9rem 1.8rem;
+    font-size: 1.1rem;
+}
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+
+/* Para las imágenes de iconos en las feature cards del index.html,
+   esto asegura que puedan ser coloreadas si son SVGs con currentColor */
+.icon {
+    display: inline-block;
+    width: 1em; /* Ajustará al font-size del padre */
+    height: 1em;
+    vertical-align: -0.125em; /* Alineación fina */
+    fill: currentColor; /* Clave para colorear SVGs con 'color' CSS */
+}
+@media (max-width: 768px) {
+    /* Ajustes Generales */
+    body {
+        padding-top: 60px; /* Si el header se hace más pequeño */
+    }
+
+    :root {
+        --header-height: 60px; /* Ejemplo: header más pequeño en móvil */
+    }
+
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    /* ... otros ajustes de tamaño de fuente ... */
+
+    .container {
+        width: 95%; /* Un poco más de ancho en pantallas pequeñas */
+    }
+
+    /* Header y Navegación */
+    .site-header {
+        height: var(--header-height);
+        /* Podrías querer que el padding del .container dentro del header cambie */
+    }
+
+    .site-logo a {
+        font-size: 1.3rem;
+    }
+    .site-logo img {
+        height: 30px;
+    }
+
+    .main-navigation {
+        /* Aquí es donde típicamente implementarías un menú hamburguesa */
+        /* Por ejemplo, ocultar la navegación normal */
+        display: none; /* O podrías convertirla en un menú desplegable */
+    }
+
+    /* Ejemplo para un menú hamburguesa (necesitarías el HTML y JS para esto) */
+    .menu-toggle {
+        display: block; /* Mostrar el botón de hamburguesa */
+        /* ... estilos para el botón ... */
+    }
+
+    .main-navigation.is-open { /* Clase que se añade con JS al abrir el menú */
+        display: block;
+        position: absolute;
+        top: var(--header-height); /* Debajo del header */
+        left: 0;
+        width: 100%;
+        background-color: var(--color-surface);
+        box-shadow: var(--shadow-md);
+        padding: 20px;
+    }
+    .main-navigation.is-open ul {
+        flex-direction: column; /* Apilar los elementos verticalmente */
+        align-items: center;
+    }
+    .main-navigation.is-open li {
+        margin-left: 0;
+        margin-bottom: 15px;
+        width: 100%;
+        text-align: center;
+    }
+    .main-navigation.is-open a {
+        padding: 10px;
+        display: block; /* Para que ocupen todo el ancho del li */
+    }
+
+
+    /* Footer */
+    .site-footer {
+        padding: 30px 0;
+        font-size: 0.85rem;
+    }
+
+    /* Botones */
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    .btn-lg {
+        padding: 0.8rem 1.6rem;
+        font-size: 1rem;
+    }
+    /* Otros ajustes específicos que necesites... */
+    /* Por ejemplo, si tienes columnas con display: flex, podrías cambiarlas a flex-direction: column */
+    /* .tu-clase-flex {
+        flex-direction: column;
+    }
+    .tu-clase-flex > * {
+        width: 100%;
+        margin-bottom: 20px;
+    } */
+}
+
+
+/* Para móviles (hasta 480px) - aún más específico si es necesario */
+@media (max-width: 480px) {
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+}
+
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+/* En el HTML, usa <svg class="icon"><use xlink:href="#icon-id"></use></svg> o <img src="icon.svg" class="icon"> */
+
+/* Fin de style.css */

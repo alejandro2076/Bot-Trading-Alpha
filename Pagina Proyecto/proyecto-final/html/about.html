@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de - Explorador de Algoritmos</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- <link rel="stylesheet" href="../css/components.css"> --> <!-- Podría no ser necesario si no hay componentes complejos del juego aquí -->
+    <style>
+        /* Estilos específicos para la página "Acerca de" */
+        .about-header {
+            background-color: var(--color-secondary-light-accent); /* Un fondo suave y cálido */
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--color-secondary);
+        }
+
+        .about-header h1 {
+            color: var(--color-secondary-dark);
+            font-size: 3em;
+        }
+
+        .about-content {
+            padding: 40px 0; /* Espacio vertical, el .container interno manejará el horizontal */
+            line-height: 1.8; /* Mayor interlineado para facilitar la lectura */
+            font-size: 1.1em; /* Texto ligeramente más grande */
+            color: var(--color-text-main);
+        }
+
+        .about-content .container {
+            max-width: 800px; /* Contenido más centrado y legible */
+        }
+
+        .about-content h2 {
+            color: var(--color-primary);
+            margin-top: 2.5em;
+            margin-bottom: 0.8em;
+            border-bottom: 2px solid var(--color-primary-light);
+            padding-bottom: 0.3em;
+        }
+         .about-content h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5em;
+        }
+
+        .about-content ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-bottom: 1.5em;
+        }
+        .about-content li {
+            margin-bottom: 0.5em;
+        }
+
+        .team-section { /* Si decides añadir una sección sobre ti o el equipo */
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover; /* Para que la imagen se vea bien sin importar su aspect ratio original */
+            margin: 0 auto 20px auto;
+            display: block;
+            border: 5px solid var(--color-background-alt);
+            box-shadow: var(--shadow-md);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="index.html">
+                    <!-- <img src="../images/logo.png" alt="Explorador de Algoritmos"> -->
+                    Explorador de Algoritmos
+                </a>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="sorting-game.html">Juego de Ordenamiento</a></li>
+                    <li><a href="bubble-sort.html">Bubble Sort</a></li>
+                    <li><a href="highscores.html">Puntuaciones</a></li>
+                    <li><a href="about.html" class="active">Acerca de</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-header">
+            <div class="container">
+                <h1>Sobre el Explorador de Algoritmos</h1>
+            </div>
+        </section>
+
+        <section class="about-content">
+            <div class="container">
+                <h2>Nuestra Misión</h2>
+                <p>
+                    El "Explorador de Algoritmos" nació de la pasión por la informática y la creencia de que el aprendizaje puede ser una experiencia
+                    divertida e interactiva. Nuestro objetivo principal es desmitificar los algoritmos, especialmente los de ordenamiento,
+                    haciéndolos accesibles y comprensibles para estudiantes, desarrolladores y cualquier persona curiosa por la materia.
+                </p>
+                <p>
+                    Creemos que entender los fundamentos de los algoritmos no solo mejora las habilidades de programación, sino que también
+                    fomenta el pensamiento crítico y la resolución de problemas de una manera más eficiente y elegante.
+                </p>
+
+                <h2>¿Qué Ofrecemos?</h2>
+                <p>En esta plataforma encontrarás:</p>
+                <ul>
+                    <li><strong>Juegos Interactivos:</strong> Una forma lúdica de experimentar con algoritmos, como nuestro popular juego de ordenamiento basado en Bubble Sort.</li>
+                    <li><strong>Visualizaciones Claras:</strong> Explicaciones paso a paso y demostraciones visuales de cómo funcionan diferentes algoritmos.</li>
+                    <li><strong>Aprendizaje Progresivo:</strong> Comenzamos con conceptos básicos y planeamos expandirnos a algoritmos más complejos en el futuro.</li>
+                    <li><strong>Recursos Educativos:</strong> Artículos y guías para profundizar en los temas tratados.</li>
+                </ul>
+
+                <h2>Tecnologías Utilizadas</h2>
+                <p>
+                    Este proyecto ha sido desarrollado utilizando tecnologías web estándar y modernas para asegurar una experiencia fluida y accesible:
+                </p>
+                <ul>
+                    <li>HTML5 para la estructura semántica.</li>
+                    <li>CSS3 (con un enfoque en Flexbox, Grid y variables CSS) para el diseño y la presentación visual.</li>
+                    <li>JavaScript (Vanilla JS) para toda la interactividad, la lógica del juego y las visualizaciones.</li>
+                </ul>
+                <p>
+                    Nos esforzamos por mantener un código limpio, eficiente y bien comentado, siguiendo las mejores prácticas del desarrollo web.
+                </p>
+
+                <section class="team-section">
+                    <h2>Sobre el Desarrollador</h2>
+                    <!-- Puedes añadir una imagen tuya si quieres -->
+                    <!-- <img src="../images/profile-pic.jpg" alt="Foto del desarrollador" class="profile-image"> -->
+                    <p>
+                        Este proyecto es desarrollado y mantenido por [Tu Nombre/Tu Alias], un entusiasta del desarrollo web y la educación tecnológica.
+                        Con un fuerte interés en crear herramientas que faciliten el aprendizaje y la comprensión de conceptos técnicos complejos.
+                    </p>
+                    <p>
+                        ¡Espero que disfrutes explorando el mundo de los algoritmos tanto como yo disfruté creando esta plataforma!
+                        Si tienes alguna sugerencia, feedback o simplemente quieres saludar, no dudes en <a href="mailto:tuemail@ejemplo.com">contactarme</a>.
+                        <!-- O puedes poner un enlace a tu perfil de GitHub, LinkedIn, etc. -->
+                    </p>
+                </section>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© <span id="current-year">2023</span> Explorador de Algoritmos. Todos los derechos reservados.</p>
+            <p>
+                <a href="privacy-policy.html">Política de Privacidad</a> |
+                <a href="terms-of-service.html">Términos de Servicio</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts JavaScript -->
+    <script src="../js/script.js"></script>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Lógica para la clase 'active' en la navegación
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.main-navigation a');
+            const currentPath = window.location.pathname.split("/").pop();
+
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split("/").pop();
+                link.classList.remove('active');
+                if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+            if (currentPath === 'about.html') { // Asegurar que 'Acerca de' esté activo en su propia página
+                const aboutLink = document.querySelector('.main-navigation a[href="about.html"]');
+                if(aboutLink) aboutLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

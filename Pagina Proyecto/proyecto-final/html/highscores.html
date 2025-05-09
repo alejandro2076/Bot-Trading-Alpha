@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mejores Puntuaciones - Explorador de Algoritmos</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <!-- Los estilos específicos de la tabla de highscores y el header de esta página
+         están definidos en el components.css y/o style.css, o podrías
+         mantenerlos aquí si son muy únicos y no se reutilizan.
+         Por simplicidad y siguiendo tu enfoque, he mantenido los estilos
+         específicos del layout de highscores en el HTML para el último ejemplo,
+         pero idealmente irían a components.css. Asumiré que ya están en components.css
+         o que decides mantenerlos aquí.
+    -->
+    <style>
+        /* Mantenemos estilos específicos de layout de esta página aquí como en tu último ejemplo de highscores.html */
+        /* Si estos se mueven a components.css, este bloque <style> podría eliminarse. */
+        .highscores-header {
+            background-color: var(--color-primary-light, #A1887F); /* Color de fallback */
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--color-primary-dark, #5D4037);
+        }
+        .highscores-header h1 {
+            color: var(--color-primary-dark, #5D4037);
+            font-size: 2.8em; margin-bottom: 0.2em;
+        }
+        .highscores-header p.subtitle {
+            font-size: 1.2em; color: var(--color-text-muted);
+            max-width: 650px; margin: 0 auto;
+        }
+        .highscores-content { padding: 30px 0; font-size: 1em; color: var(--color-text-main); }
+        .highscores-content .container { max-width: 850px; }
+        .highscores-content > .container > h2 {
+             font-size: 2em; color: var(--color-primary-dark);
+             margin-bottom: 25px; text-align: center; /* Centrado */
+        }
+
+        .scores-table-wrapper {
+            overflow-x: auto; margin-top: 15px; background-color: var(--color-surface);
+            border-radius: var(--border-radius-md); box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border-light);
+        }
+        .scores-table { width: 100%; min-width: 600px; border-collapse: collapse; }
+        .scores-table th, .scores-table td {
+            border-bottom: 1px solid var(--color-border-ultralight);
+            padding: 12px 10px; text-align: left; vertical-align: middle;
+        }
+        .scores-table tr:last-child td { border-bottom: none; }
+
+        .scores-table thead th {
+            background-color: var(--color-secondary-light, #D7CCC8);
+            color: var(--color-text-on-secondary, #3E2723);
+            font-weight: 600; font-size: 0.9em; text-transform: uppercase;
+            letter-spacing: 0.75px; position: sticky; top: var(--header-height);
+            z-index: 5;
+        }
+        .scores-table tbody tr:nth-child(even) { background-color: var(--color-background-alt); }
+        .scores-table tbody tr:hover { background-color: var(--color-secondary-light-accent, #EFEBE9); }
+
+        .scores-table .rank { font-weight: 700; width: 8%; text-align: center; color: var(--color-primary); font-size: 1.1em; }
+        .scores-table .player-name { width: 35%; font-weight: 500; color: var(--color-primary-dark); }
+        .scores-table .score-level, .scores-table .score-moves, .scores-table .score-time { width: 13%; text-align: center; font-weight: 500; }
+        .scores-table .score-date { width: 18%; text-align: right; font-size: 0.85em; color: var(--color-text-muted); }
+
+        .no-scores-message {
+            text-align: center; padding: 30px 20px; font-style: italic; color: var(--color-text-muted);
+            background-color: var(--color-background-alt); border: 1px solid var(--color-border-light);
+            border-radius: var(--border-radius-md); margin-top: 30px;
+        }
+        .no-scores-message p { margin-bottom: 15px; }
+        .action-buttons { text-align: center; margin-top: 35px; padding-bottom: 20px; }
+        .action-buttons .btn { margin: 5px 8px; }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="index.html">Explorador de Algoritmos</a>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="sorting-game.html">Juego</a></li>
+                    <li><a href="bubble-sort.html">Bubble Sort</a></li>
+                    <li><a href="highscores.html" class="active">Puntuaciones</a></li>
+                    <li><a href="about.html">Acerca de</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="highscores-header">
+            <div class="container">
+                <h1>Salón de la Fama</h1>
+                <p class="subtitle">¡Compite por el primer puesto en nuestro Juego de Ordenamiento!</p>
+            </div>
+        </section>
+
+        <section class="highscores-content">
+            <div class="container">
+                <h2 class="text-center">Mejores Puntuaciones Registradas</h2>
+
+                <!-- Contenedor para la tabla, permite scroll horizontal si es necesario -->
+                <div class="scores-table-wrapper">
+                    <table class="scores-table" id="highscoresTable"> <!-- ID NO necesario aquí si apuntamos al tbody -->
+                        <thead>
+                            <tr>
+                                <th class="rank">#</th>
+                                <th class="player-name">Jugador</th>
+                                <th class="score-level">Nivel</th>
+                                <th class="score-moves">Mov.</th>
+                                <th class="score-time">Tiempo</th>
+                                <th class="score-date">Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody id="highscoresTableBody"> <!-- ID CRUCIAL para JS -->
+                            <!-- Las filas (<tr>) se insertarán aquí por highscores.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mensaje que se muestra si no hay puntuaciones, inicialmente oculto -->
+                <div id="noScoresMessage" class="no-scores-message" style="display: none;">
+                    <p>Aún no hay hazañas registradas...<br>¡Juega una partida y sé el primero!</p>
+                    <a href="sorting-game.html" class="btn btn-primary mt-1">Ir al Juego</a>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="action-buttons">
+                    <button id="clearScoresBtn" class="btn btn-danger btn-sm">Limpiar Puntuaciones</button>
+                    <a href="sorting-game.html" class="btn btn-secondary btn-sm">Jugar de Nuevo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© <span id="current-year"></span> Explorador de Algoritmos. Todos los derechos reservados.</p>
+            <p><a href="#">Política de Privacidad</a> | <a href="#">Términos de Servicio</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts JavaScript -->
+    <!-- <script src="../js/script.js"></script>  Script global, si es necesario -->
+    <script src="../js/highscores.js"></script> <!-- Script específico para esta página -->
+
+    <script>
+        // Script para año y navegación activa (mismo que en otras páginas)
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            const navLinks = document.querySelectorAll('.main-navigation a');
+            const currentPath = window.location.pathname.split("/").pop();
+
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split("/").pop();
+                link.classList.remove('active');
+                if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+            if (window.location.pathname.includes('highscores.html')) {
+                 navLinks.forEach(link => link.classList.remove('active')); // Quitar active de todos primero
+                const highscoresLink = document.querySelector('.main-navigation a[href="highscores.html"]');
+                if (highscoresLink) highscoresLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

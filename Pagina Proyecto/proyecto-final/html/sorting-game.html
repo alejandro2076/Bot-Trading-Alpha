@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Ordenamiento - Explorador de Algoritmos</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <!-- No son necesarios estilos <style> inline aquí si components.css y style.css lo cubren todo -->
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="index.html">Explorador de Algoritmos</a>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="sorting-game.html" class="active">Juego</a></li>
+                    <li><a href="bubble-sort.html">Bubble Sort</a></li>
+                    <li><a href="highscores.html">Puntuaciones</a></li>
+                    <li><a href="about.html">Acerca de</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Envolvemos el game-container en un .container para mantener el padding/margen general -->
+        <div class="container">
+            <section id="game-container"> <!-- ID para estilos específicos del juego en components.css -->
+                <h2 class="text-center">Juego de Ordenamiento Interactivo</h2>
+                <p class="text-center">Haz clic en dos elementos adyacentes para intercambiarlos y ordenar la lista.</p>
+
+                <!-- Área donde se renderizarán los elementos a ordenar -->
+                <div id="game-area">
+                    <!-- Los .sort-element se generarán aquí por JavaScript -->
+                </div>
+
+                <!-- Información del juego: movimientos, tiempo, nivel -->
+                <div id="game-info">
+                    <span>Movimientos: <span id="move-count">0</span></span>
+                    <span>Tiempo: <span id="timer">0s</span></span>
+                    <span>Nivel: <span id="level">1</span></span>
+                </div>
+
+                <!-- Controles del juego: botón de inicio/reinicio/siguiente nivel -->
+                <div id="controls" class="text-center">
+                    <button id="start-game-btn" class="btn btn-accent btn-lg">Iniciar Juego</button>
+                </div>
+
+                <!-- Mensaje de victoria, inicialmente oculto -->
+                <div id="win-message" style="display: none;">
+                    <!-- El contenido será llenado por JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© <span id="current-year"></span> Explorador de Algoritmos. Todos los derechos reservados.</p>
+            <p><a href="#">Política de Privacidad</a> | <a href="#">Términos de Servicio</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts JavaScript -->
+    <!-- Script global, si existe y es necesario -->
+    <!-- <script src="../js/script.js"></script> -->
+    <!-- Script del carrusel, solo si se usa en esta página -->
+    <!-- <script src="../js/carousel.js"></script> -->
+
+    <script src="../js/sortingGame.js"></script> <!-- El script principal para este juego -->
+
+    <script>
+        // Pequeño script para actualizar el año en el footer dinámicamente
+        // y manejar la clase 'active' en la navegación
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            const navLinks = document.querySelectorAll('.main-navigation a');
+            const currentPath = window.location.pathname.split("/").pop();
+
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split("/").pop();
+                link.classList.remove('active'); // Asegurarse de quitar 'active' de otros
+                if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+            // Específico para esta página si la lógica anterior falla (ej. si currentPath no es 'sorting-game.html' exacto)
+            if (window.location.pathname.includes('sorting-game.html')) {
+                const gameLink = document.querySelector('.main-navigation a[href="sorting-game.html"]');
+                if (gameLink) {
+                     // Quitar de todos primero
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    gameLink.classList.add('active');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

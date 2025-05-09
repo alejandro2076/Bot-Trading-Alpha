@@ -1,0 +1,322 @@
+/* proyecto-final/css/components.css */
+
+/* Este archivo se enfoca en componentes específicos como el juego de ordenamiento,
+   visualizaciones de algoritmos, tarjetas especiales, etc.
+   Hereda las variables globales (--color-*, --font-*, etc.) de style.css */
+
+
+/* ==========================================================================
+   1. Estilos del Juego de Ordenamiento (#game-container y sus hijos)
+   ========================================================================== */
+
+   #game-container {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius-lg);
+    padding: 30px 25px; /* Padding ajustado */
+    margin: 40px auto; /* Centrado y con margen superior/inferior */
+    max-width: 700px; /* Ancho máximo del contenedor del juego */
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+    text-align: center;
+}
+
+#game-container h2 { /* El título "Juego de Ordenamiento Interactivo" */
+    color: var(--color-primary-dark);
+    font-size: 2rem; /* Ligeramente más pequeño que el h2 global */
+    margin-bottom: 10px;
+}
+
+#game-container p { /* El párrafo de instrucción */
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    margin-bottom: 25px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#game-area {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Fundamental para las barras */
+    min-height: 220px;    /* Altura mínima aumentada para mejor visualización */
+    background-color: var(--color-background-alt);
+    border: 2px dashed var(--color-secondary-light); /* Borde discontinuo más suave */
+    border-radius: var(--border-radius-md);
+    padding: 20px 15px;
+    gap: 6px; /* Espacio entre elementos de ordenamiento */
+    margin-top: 20px;
+    margin-bottom: 30px;
+    overflow-x: auto; /* Scroll si hay muchos elementos */
+    transition: background-color var(--transition-smooth); /* Transición para fondo si cambia */
+}
+
+.sort-element {
+    background-color: var(--color-secondary); /* Color base de los elementos */
+    color: var(--color-text-on-secondary);    /* Texto que contraste con el color base */
+    border: 1px solid var(--color-secondary-dark); /* Borde ligeramente más oscuro */
+    border-radius: var(--border-radius-sm);
+    width: 45px; /* Ancho de cada barra/caja */
+    min-width: 30px;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 1.1em; /* Tamaño del número dentro del elemento */
+    display: flex;
+    align-items: center; /* Centra el número verticalmente si es una caja */
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    position: relative; /* Para animaciones de pseudo-elementos o hijos */
+
+    /* Transiciones SÚPER IMPORTANTES para la interactividad */
+    transition:
+        background-color var(--transition-smooth),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-smooth),
+        height var(--transition-smooth); /* Transición de altura para barras */
+
+    /* Altura para CAJAS DE NÚMEROS (comentar si se usan barras de altura variable) */
+    height: 60px;
+    /* NOTA: Si son BARRAS, esta altura se define dinámicamente en JS. Ejemplo:
+       element.style.height = `${value * 10 + 30}px`; // (valor * multiplicador + altura base)
+       Asegurarse de que #game-area tiene align-items: flex-end;
+    */
+}
+
+.sort-element:hover {
+    background-color: var(--color-secondary-dark);
+    border-color: var(--color-primary-dark);
+    color: var(--color-text-on-primary);
+    transform: translateY(-4px) scale(1.03); /* Ligero levantamiento y zoom */
+    box-shadow: var(--shadow-md);
+    z-index: 5; /* Para que esté sobre otros elementos al hacer hover */
+}
+
+.sort-element.selected {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent-dark);
+    color: var(--color-surface); /* Texto blanco sobre color acento */
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2), 0 0 5px var(--color-accent-dark); /* Sombra más pronunciada */
+    z-index: 10; /* Por encima de los no seleccionados */
+}
+
+.sort-element.swapping {
+    /* Estilo temporal mientras se está intercambiando, puede ser más sutil o llamativo */
+    animation: pulseAndLift 0.6s ease-in-out; /* Animación definida abajo */
+    /* background-color: var(--color-primary-light); */ /* O un color específico para swapping */
+    z-index: 20; /* Por encima de todo lo demás durante el swap */
+}
+
+/* Animación para .swapping */
+@keyframes pulseAndLift {
+    0% {
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: var(--shadow-md);
+    }
+    50% {
+        transform: scale(1.2) translateY(-8px) rotate(3deg);
+        box-shadow: var(--shadow-lg);
+        background-color: var(--color-accent-dark); /* Cambio de color momentáneo */
+        color: var(--color-surface);
+    }
+    100% {
+        transform: scale(1.05) translateY(-3px);
+        box-shadow: var(--shadow-md);
+    }
+}
+
+
+#game-info {
+    font-size: 1rem; /* Tamaño de fuente de la información del juego */
+    color: var(--color-text-muted);
+    background-color: var(--color-background-alt);
+    padding: 12px 15px;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 30px;
+    border: 1px solid var(--color-border-light);
+    display: flex;
+    justify-content: space-around; /* Distribuye los elementos de info */
+    align-items: center;
+    flex-wrap: wrap; /* Para que se ajuste en pantallas pequeñas */
+    gap: 10px;
+}
+
+#game-info span { /* Los textos "Movimientos:", "Tiempo:", "Nivel:" */
+    font-weight: 500;
+}
+
+#game-info span[id] { /* Los valores numéricos #move-count, #timer, #level */
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    background-color: var(--color-surface);
+    padding: 3px 8px;
+    border-radius: var(--border-radius-sm);
+    margin-left: 4px; /* Pequeño espacio */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#controls { /* El div que contiene el botón de inicio/reinicio */
+    margin-bottom: 25px;
+}
+#controls #start-game-btn { /* Aplicando estilos de botón globales desde style.css */
+    /* Puedes añadir especificidad si es necesario, e.g. btn-accent btn-lg */
+    min-width: 200px; /* Ancho mínimo para el botón principal */
+}
+
+#win-message {
+    background-color: var(--color-secondary-light); /* Fondo suave para el mensaje de victoria */
+    color: var(--color-primary-dark);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--border-radius-md);
+    padding: 25px 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 30px;
+    box-shadow: var(--shadow-md);
+    /* display: none; -- controlado por JS */
+    animation: fadeInScaleUp 0.5s ease-out; /* Animación de entrada */
+}
+
+@keyframes fadeInScaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================================================================
+   2. Estilos para Bloques de Código (Ej: en bubble-sort.html)
+   ========================================================================== */
+.code-block {
+    background-color: #2a2734; /* Un púrpura oscuro casi negro, buena alternativa a negro puro */
+    color: #383232; /* Texto base oscuro*/
+    padding: 20px 25px;
+    border-radius: var(--border-radius-md);
+    overflow-x: auto;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* Buena pila de fuentes monoespaciadas */
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin: 25px 0;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.05), var(--shadow-md); /* Borde sutil y sombra */
+    white-space: pre; /* Preserva espacios y saltos de línea */
+}
+
+.code-block pre {
+    margin: 0;
+    /* white-space: pre-wrap;  Si quieres que el texto se ajuste automáticamente,
+                              pero overflow-x: auto es generalmente mejor para código */
+}
+/* Colores para resaltado de sintaxis (ejemplos, necesitarás aplicarlos con JS o manualmente) */
+.code-block .token.comment,
+.code-block .token.prolog,
+.code-block .token.doctype,
+.code-block .token.cdata { color: #999988; font-style: italic; } /* Comentarios gris/marrón */
+
+.code-block .token.punctuation { color: #cccccc; } /* Puntuación gris claro */
+
+.code-block .token.property,
+.code-block .token.tag,
+.code-block .token.boolean,
+.code-block .token.number,
+.code-block .token.constant,
+.code-block .token.symbol,
+.code-block .token.deleted { color: var(--color-accent, #FFAB91); } /* Rosa/Melocotón para valores y tags */
+
+.code-block .token.selector,
+.code-block .token.attr-name,
+.code-block .token.string,
+.code-block .token.char,
+.code-block .token.builtin,
+.code-block .token.inserted { color: #a6e22e; } /* Verde lima para strings, selectores */
+
+.code-block .token.operator,
+.code-block .token.entity,
+.code-block .token.url,
+.language-css .code-block .token.string,
+.style .code-block .token.string { color: #f8f8f2; background: hsla(0,0%,100%,.5); } /* Operadores blancos, links, etc. */
+
+.code-block .token.atrule,
+.code-block .token.attr-value,
+.code-block .token.keyword { color: #66d9ef; } /* Azul cian para keywords y at-rules */
+
+.code-block .token.function,
+.code-block .token.class-name { color: #e6db74; } /* Amarillo para funciones y clases */
+
+.code-block .token.regex,
+.code-block .token.important,
+.code-block .token.variable { color: #fd971f; } /* Naranja para variables y regex */
+
+.code-block .token.important,
+.code-block .token.bold { font-weight: bold; }
+.code-block .token.italic { font-style: italic; }
+
+
+/* ==========================================================================
+   3. Estilos para Tablas (Ej: en highscores.html, complexity-table en bubble-sort.html)
+   ========================================================================== */
+
+/* Estilos base para .scores-table y .complexity-table, algunos ya están en el style de la página HTML */
+.scores-table, .complexity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.95rem; /* Tamaño de fuente base para tablas */
+    background-color: var(--color-surface); /* Fondo blanco para la tabla */
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--border-radius-md); /* Redondeo si no está en un .wrapper */
+    overflow: hidden; /* Para que el border-radius aplique a las celdas de esquina */
+}
+
+.scores-table th, .scores-table td,
+.complexity-table th, .complexity-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-light);
+}
+.scores-table tr:last-child td,
+.complexity-table tr:last-child td {
+    border-bottom: none;
+}
+
+
+.scores-table thead th,
+.complexity-table thead th {
+    background-color: var(--color-primary-light); /* Color principal claro para encabezados */
+    color: var(--color-text-on-primary); /* Texto blanco para contraste */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+}
+/* Sticky header (asegurar padding-top en body para que no se solape con header principal) */
+/* Si necesitas que el encabezado de la tabla sea sticky y está directamente en el body:
+   .scores-table thead th, .complexity-table thead th {
+       position: sticky;
+       top: var(--header-height); Ajusta según la altura de tu header del sitio
+       z-index: 5;
+   }
+*/
+
+
+.scores-table tbody tr:hover,
+.complexity-table tbody tr:hover {
+    background-color: var(--color-background-alt);
+}
+
+.scores-table tbody tr:nth-child(even),
+.complexity-table tbody tr:nth-child(even) {
+
+    
+    /* Ya definido en el style del html, se podría generalizar aquí
+    background-color: var(--color-background-alt-lighter);  Un gris aún más claro si es necesario
+    */
+}
+
+
+/* Fin de components.css */

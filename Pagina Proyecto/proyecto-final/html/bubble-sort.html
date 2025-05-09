@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort - Explorador de Algoritmos</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/components.css"> <!-- Para estilos de 'code-block', 'visualization-area', etc. -->
+    <style>
+        /* Estilos específicos para la página de Bubble Sort */
+        .algorithm-header {
+            background-color: var(--color-primary-light-accent); /* Tono suave de nuestro primario */
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--color-primary);
+        }
+
+        .algorithm-header h1 {
+            color: var(--color-primary-dark);
+            font-size: 3em;
+        }
+        .algorithm-header p.subtitle {
+            font-size: 1.3em;
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin: 0.5em auto 0 auto;
+        }
+
+        .algorithm-content {
+            padding: 40px 0;
+            font-size: 1.1em;
+            color: var(--color-text-main);
+        }
+
+        .algorithm-content .container {
+            max-width: 900px; /* Un poco más ancho para acomodar visualizaciones o código */
+        }
+
+        .algorithm-content h2 {
+            color: var(--color-secondary); /* Usando el color secundario para estos títulos */
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            border-bottom: 2px solid var(--color-secondary-light);
+            padding-bottom: 0.3em;
+        }
+        .algorithm-content h2:first-of-type {
+            margin-top: 0;
+        }
+         .algorithm-content h3 {
+            color: var(--color-secondary-dark);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+
+        .algorithm-content p, .algorithm-content li {
+            line-height: 1.7;
+            margin-bottom: 1em;
+        }
+
+        .algorithm-content ul, .algorithm-content ol {
+            margin-left: 25px;
+            margin-bottom: 1.5em;
+        }
+        .algorithm-content li {
+            margin-bottom: 0.6em;
+        }
+
+        .visualization-area {
+            background-color: var(--color-background-alt);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            margin: 30px 0;
+            min-height: 150px; /* Para la futura visualización JS */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-style: italic;
+            color: var(--color-text-muted);
+        }
+
+        .code-block {
+            background-color: #2d2d2d; /* Fondo oscuro para bloques de código */
+            color: #f0f0f0;
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            overflow-x: auto; /* Scroll horizontal si el código es muy largo */
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin: 20px 0;
+        }
+        .code-block pre {
+            margin: 0; /* Quitar margen por defecto del pre */
+        }
+        .code-block .keyword { color: #569cd6; font-weight: bold; }
+        .code-block .comment { color: #6a9955; font-style: italic; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .variable { color: #9cdcfe; }
+        .code-block .number { color: #b5cea8; }
+        .code-block .operator { color: #d4d4d4; }
+        .code-block .string { color: #ce9178; }
+
+
+        .complexity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 1em;
+        }
+        .complexity-table th, .complexity-table td {
+            border: 1px solid var(--color-border-light);
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .complexity-table th {
+            background-color: var(--color-primary-light-accent);
+            color: var(--color-primary-dark);
+            font-weight: 600;
+        }
+        .complexity-table td {
+            background-color: #fff;
+        }
+        .complexity-table tr:nth-child(even) td {
+            background-color: var(--color-background-alt);
+        }
+        .complexity-table .case { font-weight: bold; color: var(--color-secondary); }
+
+
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="index.html">
+                    Explorador de Algoritmos
+                </a>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="sorting-game.html">Juego de Ordenamiento</a></li>
+                    <li><a href="bubble-sort.html" class="active">Bubble Sort</a></li>
+                    <li><a href="highscores.html">Puntuaciones</a></li>
+                    <li><a href="about.html">Acerca de</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="algorithm-header">
+            <div class="container">
+                <h1>Algoritmo Bubble Sort</h1>
+                <p class="subtitle">Una inmersión profunda en uno de los algoritmos de ordenamiento más fundamentales.</p>
+            </div>
+        </section>
+
+        <section class="algorithm-content">
+            <div class="container">
+                <h2>¿Qué es Bubble Sort?</h2>
+                <p>
+                    Bubble Sort, también conocido como ordenamiento de burbuja, es un algoritmo de ordenamiento simple que funciona
+                    comparando repetidamente pares de elementos adyacentes y los intercambia si están en el orden incorrecto.
+                    Este proceso se repite hasta que no se necesiten más intercambios, lo que indica que la lista está ordenada.
+                    Su nombre proviene de la forma en que los elementos más pequeños o más grandes "burbujean" gradualmente hacia su posición correcta en la lista.
+                </p>
+                <p>
+                    Aunque no es el algoritmo más eficiente para listas grandes, su simplicidad lo convierte en un excelente
+                    punto de partida para entender los conceptos básicos de los algoritmos de ordenamiento.
+                </p>
+
+                <h2>¿Cómo Funciona?</h2>
+                <p>El algoritmo sigue estos pasos:</p>
+                <ol>
+                    <li>Comienza desde el primer elemento de la lista.</li>
+                    <li>Compara el elemento actual con el siguiente elemento.</li>
+                    <li>Si el elemento actual es mayor que el siguiente elemento (para orden ascendente), intercámbialos.</li>
+                    <li>Avanza al siguiente par de elementos y repite el paso 2 y 3.</li>
+                    <li>Continúa este proceso para todos los pares de elementos adyacentes en la lista. Al final de esta primera "pasada", el elemento más grande (o más pequeño, según el criterio de orden) habrá "flotado" a su posición final.</li>
+                    <li>Repite las pasadas completas a través de la lista, reduciendo en uno el número de elementos a comparar en cada nueva pasada, ya que los elementos más grandes ya están en su lugar.</li>
+                    <li>El algoritmo termina cuando una pasada completa por la lista no produce ningún intercambio.</li>
+                </ol>
+
+                <!-- <div class="visualization-area">
+                    (Área para una futura visualización interactiva de Bubble Sort con JavaScript)
+                </div> -->
+
+                <h2>Ejemplo de Pseudocódigo</h2>
+                <div class="code-block">
+<pre><code class="language-pseudocode"><span class="keyword">PROCEDIMIENTO</span> <span class="function">BubbleSort</span>(<span class="variable">lista</span>)
+  <span class="variable">n</span> = <span class="function">longitud</span>(<span class="variable">lista</span>)
+  <span class="keyword">REPETIR</span>
+    <span class="variable">intercambiado</span> = <span class="keyword">falso</span>
+    <span class="keyword">PARA</span> <span class="variable">i</span> <span class="keyword">DESDE</span> <span class="number">0</span> <span class="keyword">HASTA</span> <span class="variable">n</span>-<span class="number">2</span> <span class="keyword">HACER</span>
+      <span class="keyword">SI</span> <span class="variable">lista</span>[<span class="variable">i</span>] > <span class="variable">lista</span>[<span class="variable">i</span>+<span class="number">1</span>] <span class="keyword">ENTONCES</span>
+        <span class="comment">// Intercambiar lista[i] y lista[i+1]</span>
+        <span class="variable">temporal</span> = <span class="variable">lista</span>[<span class="variable">i</span>]
+        <span class="variable">lista</span>[<span class="variable">i</span>] = <span class="variable">lista</span>[<span class="variable">i</span>+<span class="number">1</span>]
+        <span class="variable">lista</span>[<span class="variable">i</span>+<span class="number">1</span>] = <span class="variable">temporal</span>
+        <span class="variable">intercambiado</span> = <span class="keyword">verdadero</span>
+      <span class="keyword">FIN SI</span>
+    <span class="keyword">FIN PARA</span>
+    <span class="comment">// Optimización: si no hubo intercambios, la lista está ordenada</span>
+  <span class="keyword">HASTA QUE NO</span> <span class="variable">intercambiado</span>
+<span class="keyword">FIN PROCEDIMIENTO</span></code></pre>
+                </div>
+
+                <h2>Complejidad del Algoritmo</h2>
+                <p>
+                    La complejidad temporal de Bubble Sort es una medida de cuánto tiempo tarda el algoritmo en ejecutarse
+                    en función del tamaño de la entrada (el número de elementos en la lista).
+                </p>
+                <table class="complexity-table">
+                    <thead>
+                        <tr>
+                            <th>Caso</th>
+                            <th>Complejidad Temporal</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="case">Peor Caso</td>
+                            <td>O(n<sup>2</sup>)</td>
+                            <td>Ocurre cuando la lista está ordenada en orden inverso. Se requieren n<sup>2</sup> comparaciones e intercambios.</td>
+                        </tr>
+                        <tr>
+                            <td class="case">Caso Promedio</td>
+                            <td>O(n<sup>2</sup>)</td>
+                            <td>También implica un número cuadrático de operaciones en promedio.</td>
+                        </tr>
+                        <tr>
+                            <td class="case">Mejor Caso</td>
+                            <td>O(n)</td>
+                            <td>Ocurre cuando la lista ya está ordenada. Solo se necesita una pasada para verificarlo, realizando n-1 comparaciones y 0 intercambios (con la optimización).</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    En cuanto a la <strong>complejidad espacial</strong>, Bubble Sort es un algoritmo "in-place" (en el lugar),
+                    lo que significa que solo requiere una cantidad constante de espacio de memoria adicional (O(1)) además de la lista original
+                    (para una variable temporal durante el intercambio).
+                </p>
+
+                <h2>Ventajas y Desventajas</h2>
+                <h3>Ventajas:</h3>
+                <ul>
+                    <li><strong>Simple de entender e implementar:</strong> Su lógica es muy directa.</li>
+                    <li><strong>Eficiente para listas pequeñas o casi ordenadas:</strong> En estos escenarios, puede ser sorprendentemente rápido, especialmente con la optimización.</li>
+                    <li><strong>No requiere memoria adicional significativa (O(1) espacio).</strong></li>
+                    <li><strong>Estable:</strong> Mantiene el orden relativo de los elementos con claves iguales.</li>
+                </ul>
+                <h3>Desventajas:</h3>
+                <ul>
+                    <li><strong>Muy ineficiente para listas grandes:</strong> Su complejidad O(n<sup>2</sup>) lo hace impráctico para conjuntos de datos de tamaño considerable.</li>
+                    <li><strong>Realiza muchas comparaciones e intercambios innecesarios</strong> en la mayoría de los casos.</li>
+                </ul>
+
+                <h2>¿Cuándo Usarlo?</h2>
+                <p>
+                    Debido a su ineficiencia para grandes conjuntos de datos, Bubble Sort rara vez se utiliza en aplicaciones prácticas
+                    que requieren ordenar grandes cantidades de información. Sin embargo, es valioso para:
+                </p>
+                <ul>
+                    <li><strong>Fines educativos:</strong> Es un excelente primer algoritmo para enseñar conceptos de ordenamiento.</li>
+                    <li><strong>Listas muy pequeñas:</strong> Para un puñado de elementos, la sobrecarga de algoritmos más complejos podría no valer la pena.</li>
+                    <li><strong>Detectar si una lista está casi ordenada:</strong> Si una lista está casi ordenada, Bubble Sort (con optimización) puede confirmarlo rápidamente.</li>
+                </ul>
+                <p>
+                    Para la mayoría de las aplicaciones del mundo real que involucran ordenamiento, algoritmos más eficientes como Merge Sort, Quick Sort o Heap Sort son preferibles.
+                </p>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© <span id="current-year">2023</span> Explorador de Algoritmos. Todos los derechos reservados.</p>
+            <p>
+                <a href="privacy-policy.html">Política de Privacidad</a> |
+                <a href="terms-of-service.html">Términos de Servicio</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts JavaScript -->
+    <script src="../js/script.js"></script>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Lógica para la clase 'active' en la navegación
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.main-navigation a');
+            const currentPath = window.location.pathname.split("/").pop();
+
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split("/").pop();
+                link.classList.remove('active');
+                if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+             if (currentPath === 'bubble-sort.html') {
+                const bubbleSortLink = document.querySelector('.main-navigation a[href="bubble-sort.html"]');
+                if(bubbleSortLink) bubbleSortLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

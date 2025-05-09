@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Explorador de Algoritmos</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Si tienes estilos específicos para componentes del index, podrías tener un index-components.css
+         o añadir selectores específicos para el index en components.css -->
+    <!-- <link rel="stylesheet" href="../css/components.css"> -->
+    <style>
+        /* Estilos específicos para la página de inicio - pueden ir a components.css o style.css si son reutilizables */
+        .hero-section {
+            background-color: var(--color-primary-light); /* Usando la variable de style.css */
+            background-image: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-secondary-light-accent) 100%);
+            color: var(--color-text-on-primary); /* Texto que contrasta con el fondo del hero */
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--color-primary);
+        }
+
+        .hero-section h1 {
+            font-size: 3.5em;
+            margin-bottom: 0.3em;
+            color: var(--color-primary-dark); /* Título más oscuro para destacar */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .hero-section p {
+            font-size: 1.4em;
+            margin-bottom: 1.5em;
+            color: var(--color-text-muted); /* Un poco más suave */
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-section .btn {
+            font-size: 1.2em;
+            padding: 15px 35px;
+        }
+
+        .features-section {
+            padding: 60px 20px;
+            background-color: var(--color-background-alt); /* Fondo alternativo claro */
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card img.icon { /* Asumiendo que usarás iconos SVG o PNG */
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            /* background-color: var(--color-primary-light-accent); */
+            /* border-radius: 50%; */
+            /* padding: 10px; */
+            /* filter: invert(38%) sepia(97%) saturate(1401%) hue-rotate(187deg) brightness(96%) contrast(101%); */
+            /* Ejemplo para colorear un icono SVG blanco/negro con el color primario */
+        }
+
+
+        .feature-card h3 {
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .feature-card p {
+            font-size: 0.95em;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .cta-section {
+            background-color: var(--color-secondary);
+            color: var(--color-text-on-secondary);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .cta-section h2 {
+            color: inherit; /* Heredar color del padre para que el texto sea claro */
+             margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="site-logo">
+                <a href="index.html">
+                    <!-- <img src="../images/logo.png" alt="Explorador de Algoritmos"> -->
+                    Explorador de Algoritmos
+                </a>
+            </div>
+            <nav class="main-navigation">
+                <ul>
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="sorting-game.html">Juego de Ordenamiento</a></li>
+                    <li><a href="bubble-sort.html">Bubble Sort</a></li>
+                    <li><a href="highscores.html">Puntuaciones</a></li>
+                    <li><a href="about.html">Acerca de</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h1>Descubre el Mundo de los Algoritmos</h1>
+                <p>Una plataforma interactiva para aprender, visualizar y jugar con diferentes algoritmos de ordenamiento y más.</p>
+                <a href="sorting-game.html" class="btn btn-secondary btn-lg">¡Comienza a Jugar!</a>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <h2 class="text-center">¿Qué puedes hacer?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <!-- Reemplaza 'path/to/icon-game.svg' con tu icono real -->
+                        <img src="../images/icon-game.svg" alt="Juego Icono" class="icon">
+                        <h3>Juega y Aprende</h3>
+                        <p>Experimenta con nuestro juego de ordenamiento interactivo para entender cómo funcionan los algoritmos en tiempo real.</p>
+                        <a href="sorting-game.html" class="btn btn-outline-primary mt-1">Jugar Ahora</a>
+                    </div>
+                    <div class="feature-card">
+                        <img src="../images/icon-visualize.svg" alt="Visualización Icono" class="icon">
+                        <h3>Visualiza Algoritmos</h3>
+                        <p>Observa paso a paso la ejecución de algoritmos como Bubble Sort, con explicaciones claras y visuales.</p>
+                        <a href="bubble-sort.html" class="btn btn-outline-primary mt-1">Ver Bubble Sort</a>
+                    </div>
+                    <div class="feature-card">
+                        <img src="../images/icon-scores.svg" alt="Puntuaciones Icono" class="icon">
+                        <h3>Compite y Mejora</h3>
+                        <p>Guarda tus mejores puntuaciones en el juego de ordenamiento y compite por el primer lugar en la tabla.</p>
+                        <a href="highscores.html" class="btn btn-outline-primary mt-1">Ver Puntuaciones</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>¿Listo para Explorar?</h2>
+                <p class="mb-1">Sumérgete en el fascinante universo de los algoritmos y mejora tus habilidades de resolución de problemas.</p>
+                <a href="about.html" class="btn btn-light btn-lg">Conoce Más Sobre Nosotros</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© <span id="current-year">2023</span> Explorador de Algoritmos. Todos los derechos reservados.</p>
+            <p>
+                <a href="privacy-policy.html">Política de Privacidad</a> |
+                <a href="terms-of-service.html">Términos de Servicio</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts JavaScript -->
+    <script src="../js/script.js"></script>
+    <!-- Si tienes un carousel.js y lo usas en el index, descomenta -->
+    <!-- <script src="../js/carousel.js"></script> -->
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Lógica para la clase 'active' en la navegación (misma que en sorting-game.html)
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.main-navigation a');
+            const currentPath = window.location.pathname.split("/").pop();
+
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').split("/").pop();
+                 // Quitar 'active' de todos primero
+                link.classList.remove('active');
+                if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
+                    link.classList.add('active');
+                }
+            });
+             // Caso especial para la raíz, si currentPath es '' o 'index.html'
+            if (currentPath === '' || currentPath === 'index.html') {
+                const homeLink = document.querySelector('.main-navigation a[href="index.html"]');
+                if (homeLink) homeLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
